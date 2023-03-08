@@ -2,7 +2,9 @@ const {Contact} = require('../models/contact');
 const {ctrlWrapper} = require('../helpers');
 
 const getAllContacts = async (req, res) => {
-        const result = await Contact.find();
+        const {_id: owner} = req.user;
+        const result = await Contact.find({owner});
+        console.log(result)
         res.json(result);
 }
 
@@ -16,7 +18,8 @@ const getContactByID = async (req, res) => {
 }
 
 const addContact = async (req, res) => {
-        const result = await Contact.create(req.body);
+        const {_id: owner} = req.user;
+        const result = await Contact.create({...req.body, owner});
         res.status(201).json(result)
 }
 
