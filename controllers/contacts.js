@@ -4,7 +4,6 @@ const {ctrlWrapper} = require('../helpers');
 const getAllContacts = async (req, res) => {
         const {_id: owner} = req.user;
         const result = await Contact.find({owner});
-        console.log(result)
         res.json(result);
 }
 
